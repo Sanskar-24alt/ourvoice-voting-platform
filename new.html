@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OurVoice - Your Vote, Your Voice</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1152d4",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+              "navy": "#0A2463",
+              "red-accent": "#D83121",
+              "off-white": "#F7F7F7",
+              "medium-grey": "#6B7280",
+              "dark-text": "#101622",
+              "light-text": "#f6f6f8"
+            },
+            fontFamily: {
+              "display": ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .fade-in-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0A2463 0%, #1152d4 50%, #D83121 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            transition: all 0.5s ease;
+        }
+        
+        .stat-number.animate {
+            animation: pulse 1s ease-out;
+        }
+        
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        
+        .image-container img {
+            transition: transform 0.5s ease;
+        }
+        
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-dark-text dark:text-light-text">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex items-center justify-center whitespace-nowrap bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-solid border-gray-200 dark:border-gray-800 px-4 sm:px-10 lg:px-40 py-3 transition-all duration-300" id="navbar">
+<div class="flex items-center justify-between w-full max-w-7xl">
+<div class="flex items-center gap-4 text-navy dark:text-off-white">
+<span class="material-symbols-outlined text-2xl text-primary">how_to_vote</span>
+<h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">OurVoice</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="#why-vote">Why Vote</a>
+<a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="#register">Register</a>
+<a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="#how-to-vote">How to Vote</a>
+<a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="#stats">Stats</a>
+</div>
+<button onclick="openAdminLogin()" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-colors">
+<span class="truncate">Admin Login</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-red-accent text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-colors">
+<span class="truncate">Get Involved</span>
+</button>
+</nav>
+<button class="md:hidden p-2 rounded-md text-dark-text dark:text-light-text">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-7xl flex-1 px-4 sm:px-10 lg:px-20 space-y-16 md:space-y-24">
+<!-- HeroSection -->
+<section id="hero">
+<div class="@container">
+<div class="@[480px]:p-4">
+<div class="flex min-h-[60vh] md:min-h-[70vh] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4 text-center relative overflow-hidden" data-alt="Abstract gradient background with blue and red hues" style='background-image: linear-gradient(rgba(10, 36, 99, 0.75) 0%, rgba(10, 36, 99, 0.85) 100%), url("https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&q=80");'>
+<div class="absolute inset-0 bg-gradient-to-br from-navy/90 via-primary/80 to-red-accent/70 animate-pulse-slow"></div>
+<div class="flex flex-col gap-4 relative z-10 animate-fade-in-up">
+<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-6xl drop-shadow-lg">Your Vote. Your Voice.</h1>
+<h2 class="text-off-white text-base font-normal leading-normal md:text-lg max-w-2xl mx-auto drop-shadow-md">Make a difference in your community and shape the future. Every vote counts towards a stronger democracy.</h2>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-red-accent text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 hover:scale-105 transition-all duration-300 shadow-lg relative z-10 animate-fade-in-up" style="animation-delay: 0.2s; opacity: 0;" onclick="scrollToSection('register')">
+<span class="truncate">Learn How to Vote</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- FeatureSection -->
+<section id="why-vote">
+<div class="flex flex-col gap-10 py-10 @container">
+<div class="flex flex-col gap-4 text-center">
+<h1 class="text-navy dark:text-off-white tracking-tight text-3xl font-bold leading-tight @[480px]:text-4xl @[480px]:font-black max-w-3xl mx-auto">Why Voting Matters</h1>
+<p class="text-medium-grey text-base font-normal leading-normal max-w-3xl mx-auto">Your participation is crucial for a healthy democracy. Discover the impact you can make by casting your ballot.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-0">
+<div class="flex flex-1 gap-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-navy p-6 flex-col items-center text-center card-hover fade-in-on-scroll shadow-md">
+<div class="image-container w-full h-48 mb-4 rounded-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80" alt="Community voting" class="w-full h-full object-cover">
+</div>
+<span class="material-symbols-outlined text-4xl text-primary animate-float">groups</span>
+<div class="flex flex-col gap-2">
+<h2 class="text-navy dark:text-off-white text-lg font-bold leading-tight">Shape Your Community</h2>
+<p class="text-medium-grey text-sm font-normal leading-normal">Elect leaders who represent your values and will address local issues that affect your daily life.</p>
+</div>
+</div>
+<div class="flex flex-1 gap-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-navy p-6 flex-col items-center text-center card-hover fade-in-on-scroll shadow-md" style="transition-delay: 0.1s;">
+<div class="image-container w-full h-48 mb-4 rounded-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Policy influence" class="w-full h-full object-cover">
+</div>
+<span class="material-symbols-outlined text-4xl text-primary animate-float" style="animation-delay: 0.5s;">gavel</span>
+<div class="flex flex-col gap-2">
+<h2 class="text-navy dark:text-off-white text-lg font-bold leading-tight">Influence Policy</h2>
+<p class="text-medium-grey text-sm font-normal leading-normal">Your vote helps decide on critical policies, from healthcare and education to environmental protection.</p>
+</div>
+</div>
+<div class="flex flex-1 gap-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-navy p-6 flex-col items-center text-center card-hover fade-in-on-scroll shadow-md" style="transition-delay: 0.2s;">
+<div class="image-container w-full h-48 mb-4 rounded-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&q=80" alt="Democracy" class="w-full h-full object-cover">
+</div>
+<span class="material-symbols-outlined text-4xl text-primary animate-float" style="animation-delay: 1s;">verified_user</span>
+<div class="flex flex-col gap-2">
+<h2 class="text-navy dark:text-off-white text-lg font-bold leading-tight">Uphold Democracy</h2>
+<p class="text-medium-grey text-sm font-normal leading-normal">Participating in elections is a fundamental right and responsibility that strengthens our society.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How to Register Section -->
+<section id="register">
+<div class="flex flex-col md:flex-row items-center gap-12 @container">
+<div class="flex-1">
+<h2 class="text-navy dark:text-off-white text-3xl font-bold leading-tight tracking-[-0.015em] pb-3 pt-5">How to Register</h2>
+<p class="text-medium-grey text-base font-normal leading-normal max-w-md">Registering to vote is the first step to making your voice heard. Follow these simple steps to get started.</p>
+<button onclick="openRegistrationModal()" class="mt-6 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 hover:scale-105 transition-all duration-300 shadow-lg">
+<span class="truncate">Register Now</span>
+</button>
+</div>
+<div class="flex-1 w-full">
+<div class="grid grid-cols-[40px_1fr] gap-x-4">
+<div class="flex flex-col items-center gap-2">
+<div class="flex items-center justify-center size-10 rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined">person_search</span>
+</div>
+<div class="w-px bg-gray-300 dark:bg-gray-700 grow"></div>
+</div>
+<div class="flex flex-1 flex-col pb-8">
+<p class="text-sm font-bold text-primary">Step 1</p>
+<p class="text-navy dark:text-off-white text-lg font-medium leading-normal">Check Your Eligibility</p>
+<p class="text-medium-grey text-sm font-normal leading-normal mt-1">Ensure you meet the age, citizenship, and residency requirements for your state.</p>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="flex items-center justify-center size-10 rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined">edit_document</span>
+</div>
+<div class="w-px bg-gray-300 dark:bg-gray-700 grow"></div>
+</div>
+<div class="flex flex-1 flex-col pb-8">
+<p class="text-sm font-bold text-primary">Step 2</p>
+<p class="text-navy dark:text-off-white text-lg font-medium leading-normal">Complete the Registration Form</p>
+<p class="text-medium-grey text-sm font-normal leading-normal mt-1">Fill out the national or your state's voter registration form online or by mail.</p>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="flex items-center justify-center size-10 rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined">mark_email_read</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col pb-8">
+<p class="text-sm font-bold text-primary">Step 3</p>
+<p class="text-navy dark:text-off-white text-lg font-medium leading-normal">Confirm Your Registration</p>
+<p class="text-medium-grey text-sm font-normal leading-normal mt-1">You'll receive a voter registration card or confirmation. Check your status online if needed.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Steps to Vote Section -->
+<section id="how-to-vote">
+<div class="flex flex-col gap-10 py-10 @container">
+<div class="flex flex-col gap-4 text-center">
+<h1 class="text-navy dark:text-off-white tracking-tight text-3xl font-bold leading-tight @[480px]:text-4xl @[480px]:font-black max-w-3xl mx-auto">4 Steps to Cast Your Vote</h1>
+<p class="text-medium-grey text-base font-normal leading-normal max-w-3xl mx-auto">Once you're registered, follow this guide to successfully cast your ballot on election day.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="rounded-lg bg-white dark:bg-navy border border-gray-200 dark:border-gray-800 p-6 flex flex-col gap-4 card-hover fade-in-on-scroll shadow-md">
+<div class="image-container w-full h-32 mb-2 rounded-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80" alt="Check status" class="w-full h-full object-cover">
+</div>
+<span class="material-symbols-outlined text-4xl text-primary">fact_check</span>
+<h3 class="text-xl font-bold text-navy dark:text-off-white">Check Your Status</h3>
+<p class="text-medium-grey text-sm">Verify your voter registration is active and up-to-date before any deadlines.</p>
+</div>
+<div class="rounded-lg bg-white dark:bg-navy border border-gray-200 dark:border-gray-800 p-6 flex flex-col gap-4 card-hover fade-in-on-scroll shadow-md" style="transition-delay: 0.1s;">
+<div class="image-container w-full h-32 mb-2 rounded-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=600&q=80" alt="Polling place" class="w-full h-full object-cover">
+</div>
+<span class="material-symbols-outlined text-4xl text-primary">pin_drop</span>
+<h3 class="text-xl font-bold text-navy dark:text-off-white">Find Your Polling Place</h3>
+<p class="text-medium-grey text-sm">Locate your designated polling station, or find out about mail-in and early voting options.</p>
+</div>
+<div class="rounded-lg bg-white dark:bg-navy border border-gray-200 dark:border-gray-800 p-6 flex flex-col gap-4 card-hover fade-in-on-scroll shadow-md" style="transition-delay: 0.2s;">
+<div class="image-container w-full h-32 mb-2 rounded-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&q=80" alt="Review ballot" class="w-full h-full object-cover">
+</div>
+<span class="material-symbols-outlined text-4xl text-primary">ballot</span>
+<h3 class="text-xl font-bold text-navy dark:text-off-white">Review Your Ballot</h3>
+<p class="text-medium-grey text-sm">Research the candidates and measures on your sample ballot to make informed decisions.</p>
+</div>
+<div class="rounded-lg bg-white dark:bg-navy border border-gray-200 dark:border-gray-800 p-6 flex flex-col gap-4 card-hover fade-in-on-scroll shadow-md" style="transition-delay: 0.3s;">
+<div class="image-container w-full h-32 mb-2 rounded-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80" alt="Cast vote" class="w-full h-full object-cover">
+</div>
+<span class="material-symbols-outlined text-4xl text-primary">how_to_vote</span>
+<h3 class="text-xl font-bold text-navy dark:text-off-white">Cast Your Vote</h3>
+<p class="text-medium-grey text-sm">Head to the polls on Election Day or submit your mail-in ballot on time. You've done it!</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Statistics Section -->
+<section class="bg-navy dark:bg-navy py-16 px-6 sm:px-12 rounded-xl shadow-2xl" id="stats">
+<div class="flex flex-col gap-10 @container max-w-7xl mx-auto">
+<div class="flex flex-col gap-4 text-center">
+<h1 class="text-white tracking-tight text-4xl font-black leading-tight @[480px]:text-5xl max-w-3xl mx-auto">By the Numbers</h1>
+<p class="text-white text-base font-normal leading-normal max-w-3xl mx-auto">Voting statistics highlight the power of collective action and identify areas where we can improve participation.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+<div class="flex flex-col items-center gap-3 fade-in-on-scroll">
+<p class="text-6xl font-black text-red-accent stat-number" data-target="66.8%">0%</p>
+<h3 class="text-xl font-bold text-white">Turnout in 2020</h3>
+<p class="text-gray-400 text-sm leading-relaxed">The highest voter turnout of the 21st century for a presidential election.</p>
+</div>
+<div class="flex flex-col items-center gap-3 fade-in-on-scroll" style="transition-delay: 0.1s;">
+<p class="text-6xl font-black text-red-accent stat-number" data-target="50%">0%</p>
+<h3 class="text-xl font-bold text-white">Youth Involvement (18-29)</h3>
+<p class="text-gray-400 text-sm leading-relaxed">A remarkable 11-point increase from the 2016 election turnout.</p>
+</div>
+<div class="flex flex-col items-center gap-3 fade-in-on-scroll" style="transition-delay: 0.2s;">
+<p class="text-6xl font-black text-red-accent stat-number" data-target="159M">0M</p>
+<h3 class="text-xl font-bold text-white">Total Ballots Cast</h3>
+<p class="text-gray-400 text-sm leading-relaxed">Millions of Americans made their voices heard at the polls in 2020.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-navy dark:bg-background-dark text-off-white mt-16">
+<div class="max-w-7xl mx-auto py-12 px-4 sm:px-10 lg:px-20">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="col-span-2 md:col-span-1">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-2xl text-primary">how_to_vote</span>
+<h2 class="text-xl font-bold">OurVoice</h2>
+</div>
+<p class="text-sm text-medium-grey mt-2">Empowering citizens to shape their future through the power of the vote.</p>
+</div>
+<div>
+<h3 class="text-base font-bold text-white tracking-wider">Navigate</h3>
+<ul class="mt-4 space-y-2">
+<li><a class="text-sm text-medium-grey hover:text-white" href="#why-vote">Why Vote</a></li>
+<li><a class="text-sm text-medium-grey hover:text-white" href="#register">Register</a></li>
+<li><a class="text-sm text-medium-grey hover:text-white" href="#how-to-vote">How to Vote</a></li>
+<li><a class="text-sm text-medium-grey hover:text-white" href="#stats">Stats</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-base font-bold text-white tracking-wider">Resources</h3>
+<ul class="mt-4 space-y-2">
+<li><a class="text-sm text-medium-grey hover:text-white" href="#">Vote.gov</a></li>
+<li><a class="text-sm text-medium-grey hover:text-white" href="#">Election Assistance</a></li>
+<li><a class="text-sm text-medium-grey hover:text-white" href="#">Fact Checking</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-base font-bold text-white tracking-wider">Connect</h3>
+<div class="flex mt-4 space-x-4">
+<a class="text-medium-grey hover:text-white" href="#"><svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path></svg></a>
+<a class="text-medium-grey hover:text-white" href="#"><svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg></a>
+<a class="text-medium-grey hover:text-white" href="#"><svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427-.465C9.793 2.013 10.147 2 12.315 2zm0 1.62c-2.403 0-2.729.01-3.686.053-1.002.046-1.584.21-1.996.377A3.272 3.272 0 004.815 5.22a3.272 3.272 0 00-.81 1.996c-.167.412-.33 1-.377 1.996-.043.957-.053 1.283-.053 3.686s.01 2.729.053 3.686c.046 1.002.21 1.584.377 1.996a3.272 3.272 0 00.81 1.996 3.272 3.272 0 001.996.81c.412.167 1 .33 1.996.377.957.043 1.283.053 3.686.053s2.729-.01 3.686-.053c1.002-.046 1.584-.21 1.996-.377a3.272 3.272 0 001.996-.81 3.272 3.272 0 00.81-1.996c.167-.412.33-1 .377-1.996.043-.957.053-1.283.053-3.686s-.01-2.729-.053-3.686c-.046-1.002-.21-1.584-.377-1.996a3.272 3.272 0 00-.81-1.996 3.272 3.272 0 00-1.996-.81c-.412-.167-1-.33-1.996-.377C15.044 3.63 14.718 3.62 12.315 3.62zM12 7.152a4.848 4.848 0 100 9.696 4.848 4.848 0 000-9.696zM12 15a3 3 0 110-6 3 3 0 010 6zm6.315-9.482a1.185 1.185 0 100-2.37 1.185 1.185 0 000 2.37z" fill-rule="evenodd"></path></svg></a>
+</div>
+</div>
+</div>
+<div class="mt-8 border-t border-gray-700 pt-8 text-center">
+<p class="text-sm text-medium-grey">© 2024 OurVoice. All rights reserved. A non-partisan initiative.</p>
+</div>
+</div>
+</footer>
+</div>
+</div>
+
+<!-- Congratulations Popup -->
+<div id="congratulationsModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
+<div class="bg-white dark:bg-navy rounded-xl shadow-2xl max-w-md w-full mx-4 p-8 text-center animate-fade-in-up">
+<div class="mb-6">
+<span class="material-symbols-outlined text-6xl text-green-500 animate-pulse-slow">celebration</span>
+</div>
+<h3 class="text-3xl font-black text-navy dark:text-off-white mb-4">Congratulations! 🎉</h3>
+<p class="text-lg text-medium-grey mb-2">Your registration has been successfully submitted!</p>
+<p class="text-base font-bold text-primary mb-6" id="congratsVoterId"></p>
+<button onclick="closeCongratulationsModal()" class="px-8 py-3 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90 transition-colors">
+Close
+</button>
+</div>
+</div>
+
+<!-- Admin Login Modal -->
+<div id="adminLoginModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
+<div class="bg-white dark:bg-navy rounded-xl shadow-2xl max-w-md w-full mx-4">
+<div class="p-6 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+<h3 class="text-2xl font-bold text-navy dark:text-off-white">Admin Login</h3>
+<button onclick="closeAdminLogin()" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form id="adminLoginForm" class="p-6 space-y-4" onsubmit="handleAdminLogin(event)">
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">Username</label>
+<input type="text" name="username" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">Password</label>
+<input type="password" name="password" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div id="adminLoginMessage" class="hidden p-4 rounded-lg"></div>
+<div class="flex gap-4 pt-4">
+<button type="submit" class="flex-1 px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90 transition-colors">
+Login
+</button>
+<button type="button" onclick="closeAdminLogin()" class="px-6 py-3 border border-gray-300 dark:border-gray-600 text-navy dark:text-off-white rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+Cancel
+</button>
+</div>
+</form>
+</div>
+</div>
+
+<!-- Admin Dashboard Modal -->
+<div id="adminDashboardModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
+<div class="bg-white dark:bg-navy rounded-xl shadow-2xl max-w-6xl w-full mx-4 max-h-[90vh] overflow-hidden flex flex-col">
+<div class="p-6 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+<h3 class="text-2xl font-bold text-navy dark:text-off-white">Admin Dashboard - Registered Voters</h3>
+<div class="flex gap-4">
+<button onclick="refreshVoters()" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-opacity-90 transition-colors">
+<span class="material-symbols-outlined text-sm align-middle">refresh</span> Refresh
+</button>
+<button onclick="closeAdminDashboard()" class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-navy dark:text-off-white rounded-lg text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+Close
+</button>
+</div>
+</div>
+<div class="p-6 overflow-y-auto flex-1">
+<div id="votersLoading" class="text-center py-8 text-medium-grey">Loading voters...</div>
+<div id="votersList" class="hidden">
+<div class="mb-4 text-sm text-medium-grey">
+Total Registered: <span id="totalVoters" class="font-bold text-primary">0</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-gray-100 dark:bg-gray-800">
+<th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-bold text-navy dark:text-off-white">Voter ID</th>
+<th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-bold text-navy dark:text-off-white">Name</th>
+<th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-bold text-navy dark:text-off-white">Email</th>
+<th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-bold text-navy dark:text-off-white">Phone</th>
+<th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-bold text-navy dark:text-off-white">City, State</th>
+<th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-bold text-navy dark:text-off-white">Status</th>
+<th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-bold text-navy dark:text-off-white">Registered Date</th>
+<th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left text-sm font-bold text-navy dark:text-off-white">Actions</th>
+</tr>
+</thead>
+<tbody id="votersTableBody" class="text-sm text-medium-grey">
+</tbody>
+</table>
+</div>
+</div>
+<div id="votersError" class="hidden text-center py-8 text-red-accent"></div>
+</div>
+</div>
+</div>
+
+<!-- Registration Modal -->
+<div id="registrationModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
+<div class="bg-white dark:bg-navy rounded-xl shadow-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+<div class="p-6 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+<h3 class="text-2xl font-bold text-navy dark:text-off-white">Voter Registration</h3>
+<button onclick="closeRegistrationModal()" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form id="registrationForm" class="p-6 space-y-4" onsubmit="handleRegistration(event)">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">First Name *</label>
+<input type="text" name="firstName" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">Last Name *</label>
+<input type="text" name="lastName" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">Email *</label>
+<input type="email" name="email" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">Phone</label>
+<input type="tel" name="phone" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">Date of Birth *</label>
+<input type="date" name="dateOfBirth" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">Street Address *</label>
+<input type="text" name="address" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">City *</label>
+<input type="text" name="city" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">State *</label>
+<input type="text" name="state" required class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">ZIP Code *</label>
+<input type="text" name="zipCode" required pattern="[0-9]{6}" maxlength="6" placeholder="e.g., 416112" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div>
+<label class="block text-sm font-medium text-navy dark:text-off-white mb-1">SSN (Last 4 digits)</label>
+<input type="text" name="ssn" pattern="[0-9]{4}" maxlength="4" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark text-dark-text dark:text-light-text focus:ring-2 focus:ring-primary focus:border-transparent">
+</div>
+<div id="registrationMessage" class="hidden p-4 rounded-lg"></div>
+<div class="flex gap-4 pt-4">
+<button type="submit" class="flex-1 px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-opacity-90 transition-colors">
+Submit Registration
+</button>
+<button type="button" onclick="closeRegistrationModal()" class="px-6 py-3 border border-gray-300 dark:border-gray-600 text-navy dark:text-off-white rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+Cancel
+</button>
+</div>
+</form>
+</div>
+</div>
+
+<script>
+    // Smooth scrolling
+    function scrollToSection(id) {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Add smooth scroll to all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+    
+    // Scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                // Animate statistics
+                const statNumber = entry.target.querySelector('.stat-number');
+                if (statNumber && !statNumber.classList.contains('animated')) {
+                    statNumber.classList.add('animated');
+                    animateStat(statNumber);
+                }
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Animate statistics
+    function animateStat(element) {
+        const target = element.getAttribute('data-target');
+        if (!target) return;
+        
+        const isPercentage = target.includes('%');
+        const isMillion = target.includes('M');
+        const numericValue = parseFloat(target);
+        const duration = 2000;
+        const steps = 60;
+        const increment = numericValue / steps;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= numericValue) {
+                current = numericValue;
+                clearInterval(timer);
+            }
+            
+            if (isPercentage) {
+                element.textContent = current.toFixed(1) + '%';
+            } else if (isMillion) {
+                element.textContent = Math.round(current) + 'M';
+            } else {
+                element.textContent = Math.round(current);
+            }
+        }, duration / steps);
+    }
+    
+    // Navbar scroll effect
+    let lastScroll = 0;
+    const navbar = document.getElementById('navbar');
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 100) {
+            navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+        } else {
+            navbar.style.boxShadow = 'none';
+        }
+        
+        lastScroll = currentScroll;
+    });
+    
+    // Hero button animation
+    window.addEventListener('load', () => {
+        const heroButton = document.querySelector('#hero button');
+        if (heroButton) {
+            setTimeout(() => {
+                heroButton.style.opacity = '1';
+            }, 300);
+        }
+    });
+    
+    // Mobile menu toggle
+    const mobileMenuButton = document.querySelector('.md\\:hidden');
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            // Add mobile menu functionality here
+            alert('Mobile menu - Add your menu implementation');
+        });
+    }
+    
+    // Dark mode toggle (if needed)
+    function toggleDarkMode() {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+    }
+    
+    // Load dark mode preference
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.documentElement.classList.add('dark');
+    }
+    
+    // API integration functions
+    async function checkVoterStatus(voterId) {
+        try {
+            const response = await fetch('/api/voter/status', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ voterId })
+            });
+            return await response.json();
+        } catch (error) {
+            console.error('Error checking voter status:', error);
+            return null;
+        }
+    }
+    
+    async function registerVoter(voterData) {
+        try {
+            const response = await fetch('/api/voter/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(voterData)
+            });
+            return await response.json();
+        } catch (error) {
+            console.error('Error registering voter:', error);
+            return null;
+        }
+    }
+    
+    async function getVotingStats() {
+        try {
+            const response = await fetch('/api/stats');
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching stats:', error);
+            return null;
+        }
+    }
+    
+    // Load stats on page load
+    window.addEventListener('load', async () => {
+        const stats = await getVotingStats();
+        if (stats) {
+            // Update stats if needed
+            console.log('Stats loaded:', stats);
+        }
+    });
+    
+    // Admin token storage
+    let adminToken = localStorage.getItem('adminToken') || null;
+    
+    // Admin Login Functions
+    function openAdminLogin() {
+        const modal = document.getElementById('adminLoginModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeAdminLogin() {
+        const modal = document.getElementById('adminLoginModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+        document.getElementById('adminLoginForm').reset();
+        const message = document.getElementById('adminLoginMessage');
+        message.classList.add('hidden');
+        message.textContent = '';
+    }
+    
+    // Handle Admin Login
+    async function handleAdminLogin(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        const messageDiv = document.getElementById('adminLoginMessage');
+        messageDiv.classList.remove('hidden', 'bg-green-100', 'text-green-700', 'bg-red-100', 'text-red-700', 'dark:bg-green-900', 'dark:text-green-300', 'dark:bg-red-900', 'dark:text-red-300');
+        
+        try {
+            const response = await fetch('/api/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                adminToken = result.data.token;
+                localStorage.setItem('adminToken', adminToken);
+                closeAdminLogin();
+                openAdminDashboard();
+            } else {
+                throw new Error(result.message || 'Login failed');
+            }
+        } catch (error) {
+            messageDiv.classList.add('bg-red-100', 'text-red-700', 'dark:bg-red-900', 'dark:text-red-300');
+            messageDiv.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined">error</span>
+                    <p><strong>Error:</strong> ${error.message || 'Failed to login. Please try again.'}</p>
+                </div>
+            `;
+        }
+    }
+    
+    // Admin Dashboard Functions
+    function openAdminDashboard() {
+        const modal = document.getElementById('adminDashboardModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        loadVoters();
+    }
+    
+    function closeAdminDashboard() {
+        const modal = document.getElementById('adminDashboardModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+    }
+    
+    async function loadVoters() {
+        const loadingDiv = document.getElementById('votersLoading');
+        const votersList = document.getElementById('votersList');
+        const votersError = document.getElementById('votersError');
+        const tableBody = document.getElementById('votersTableBody');
+        
+        loadingDiv.classList.remove('hidden');
+        votersList.classList.add('hidden');
+        votersError.classList.add('hidden');
+        
+        try {
+            const response = await fetch('/api/admin/voters', {
+                headers: {
+                    'Authorization': `Bearer ${adminToken}`
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                const voters = result.data;
+                document.getElementById('totalVoters').textContent = voters.length;
+                
+                tableBody.innerHTML = voters.map(voter => `
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-3">${voter.voterId}</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-3 font-medium">${voter.firstName} ${voter.lastName}</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-3">${voter.email}</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-3">${voter.phone || 'N/A'}</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-3">${voter.city}, ${voter.state}</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-3">
+                            <span class="px-2 py-1 rounded text-xs font-medium ${
+                                voter.status === 'active' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' :
+                                voter.status === 'pending' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300' :
+                                voter.status === 'rejected' ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300' :
+                                'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                            }">${voter.status}</span>
+                        </td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-3">${new Date(voter.registeredDate).toLocaleDateString()}</td>
+                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-3">
+                            <div class="flex gap-2">
+                                ${voter.status === 'pending' ? `
+                                    <button onclick="approveVoter('${voter.voterId}')" class="px-3 py-1 bg-green-500 text-white rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                        Approve
+                                    </button>
+                                    <button onclick="rejectVoter('${voter.voterId}')" class="px-3 py-1 bg-red-500 text-white rounded text-xs font-medium hover:bg-red-600 transition-colors">
+                                        Reject
+                                    </button>
+                                ` : voter.status === 'rejected' ? `
+                                    <button onclick="approveVoter('${voter.voterId}')" class="px-3 py-1 bg-green-500 text-white rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                        Approve
+                                    </button>
+                                ` : voter.status === 'active' ? `
+                                    <button onclick="rejectVoter('${voter.voterId}')" class="px-3 py-1 bg-red-500 text-white rounded text-xs font-medium hover:bg-red-600 transition-colors">
+                                        Reject
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+                
+                loadingDiv.classList.add('hidden');
+                votersList.classList.remove('hidden');
+            } else {
+                throw new Error(result.message || 'Failed to load voters');
+            }
+        } catch (error) {
+            loadingDiv.classList.add('hidden');
+            votersError.classList.remove('hidden');
+            votersError.textContent = `Error: ${error.message}. Please login again.`;
+            
+            if (error.message.includes('Unauthorized')) {
+                adminToken = null;
+                localStorage.removeItem('adminToken');
+                setTimeout(() => {
+                    closeAdminDashboard();
+                    openAdminLogin();
+                }, 2000);
+            }
+        }
+    }
+    
+    function refreshVoters() {
+        loadVoters();
+    }
+    
+    // Approve Voter
+    async function approveVoter(voterId) {
+        if (!confirm('Are you sure you want to approve this voter?')) {
+            return;
+        }
+        
+        try {
+            const response = await fetch(`/api/admin/voter/${voterId}/approve`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${adminToken}`
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                alert('Voter approved successfully!');
+                loadVoters(); // Refresh the list
+            } else {
+                throw new Error(result.message || 'Failed to approve voter');
+            }
+        } catch (error) {
+            alert(`Error: ${error.message}`);
+            if (error.message.includes('Unauthorized')) {
+                adminToken = null;
+                localStorage.removeItem('adminToken');
+                closeAdminDashboard();
+                openAdminLogin();
+            }
+        }
+    }
+    
+    // Reject Voter
+    async function rejectVoter(voterId) {
+        if (!confirm('Are you sure you want to reject this voter?')) {
+            return;
+        }
+        
+        try {
+            const response = await fetch(`/api/admin/voter/${voterId}/reject`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${adminToken}`
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                alert('Voter rejected successfully!');
+                loadVoters(); // Refresh the list
+            } else {
+                throw new Error(result.message || 'Failed to reject voter');
+            }
+        } catch (error) {
+            alert(`Error: ${error.message}`);
+            if (error.message.includes('Unauthorized')) {
+                adminToken = null;
+                localStorage.removeItem('adminToken');
+                closeAdminDashboard();
+                openAdminLogin();
+            }
+        }
+    }
+    
+    // Congratulations Modal Functions
+    function showCongratulations(voterId) {
+        const modal = document.getElementById('congratulationsModal');
+        document.getElementById('congratsVoterId').textContent = `Your Voter ID: ${voterId}`;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeCongratulationsModal() {
+        const modal = document.getElementById('congratulationsModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+    }
+    
+    // Registration Modal Functions
+    function openRegistrationModal() {
+        const modal = document.getElementById('registrationModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeRegistrationModal() {
+        const modal = document.getElementById('registrationModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+        document.getElementById('registrationForm').reset();
+        const message = document.getElementById('registrationMessage');
+        message.classList.add('hidden');
+        message.textContent = '';
+    }
+    
+    // Note: Modals can only be closed using the close/cancel buttons, not by clicking outside
+    
+    // Handle Registration Form Submission
+    async function handleRegistration(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        const messageDiv = document.getElementById('registrationMessage');
+        messageDiv.classList.remove('hidden', 'bg-green-100', 'text-green-700', 'bg-red-100', 'text-red-700', 'dark:bg-green-900', 'dark:text-green-300', 'dark:bg-red-900', 'dark:text-red-300');
+        
+        try {
+            const result = await registerVoter(data);
+            
+            if (result && result.success) {
+                form.reset();
+                closeRegistrationModal();
+                // Show congratulations popup
+                showCongratulations(result.data.voterId);
+            } else {
+                throw new Error(result?.message || 'Registration failed');
+            }
+        } catch (error) {
+            messageDiv.classList.add('bg-red-100', 'text-red-700', 'dark:bg-red-900', 'dark:text-red-300');
+            messageDiv.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined">error</span>
+                    <p><strong>Error:</strong> ${error.message || 'Failed to submit registration. Please try again.'}</p>
+                </div>
+            `;
+        }
+    }
+</script>
+</body></html>
