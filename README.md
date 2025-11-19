@@ -9,6 +9,9 @@ A modern, responsive voting platform website with animations, images, and a comp
 - ✨ **Animations**: Scroll-triggered animations, fade-ins, and hover effects
 - 🔄 **Interactive Stats**: Animated statistics that count up on scroll
 - 🎯 **Backend API**: Complete Express.js backend with voter registration and status checking
+- 👤 **Admin Dashboard**: Admin login with voter approval/rejection functionality
+- 📝 **Voter Registration**: Complete registration form with validation
+- 🎉 **Success Notifications**: Congratulations popup after successful registration
 - 📱 **Responsive**: Works perfectly on desktop, tablet, and mobile devices
 - 🌙 **Dark Mode**: Built-in dark mode support
 
@@ -72,6 +75,34 @@ POST /api/polling-place
 Body: { address, city, state, zipCode }
 ```
 Returns the polling place for a given address.
+
+### Admin Login
+```
+POST /api/admin/login
+Body: { username, password }
+```
+Login as admin to access admin dashboard.
+
+### Get All Voters (Admin)
+```
+GET /api/admin/voters
+Headers: { Authorization: Bearer <token> }
+```
+Returns all registered voters (admin only).
+
+### Approve Voter (Admin)
+```
+POST /api/admin/voter/:voterId/approve
+Headers: { Authorization: Bearer <token> }
+```
+Approves a voter registration (admin only).
+
+### Reject Voter (Admin)
+```
+POST /api/admin/voter/:voterId/reject
+Headers: { Authorization: Bearer <token> }
+```
+Rejects a voter registration (admin only).
 
 ### Health Check
 ```
@@ -137,6 +168,44 @@ The backend uses in-memory storage. To use a database:
 ## License
 
 MIT License - feel free to use this project for your own purposes.
+
+## Admin Features
+
+### Default Admin Credentials
+- **Username**: `admin`
+- **Password**: `admin123`
+
+⚠️ **Important**: Change the admin password in `server.js` before deploying to production!
+
+### Admin Dashboard
+- View all registered voters
+- Approve or reject voter registrations
+- See voter status (pending/active/rejected)
+- Refresh voter list in real-time
+
+## GitHub Setup
+
+This project is ready to be pushed to GitHub. Follow these steps:
+
+1. **Create a new repository on GitHub** (don't initialize with README)
+
+2. **Add the remote repository**:
+```bash
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+```
+
+3. **Push to GitHub**:
+```bash
+git branch -M main
+git push -u origin main
+```
+
+Or if you prefer to use SSH:
+```bash
+git remote add origin git@github.com:YOUR_USERNAME/YOUR_REPO_NAME.git
+git branch -M main
+git push -u origin main
+```
 
 ## Contributing
 
